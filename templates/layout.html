@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {{ bootstrap.load_css() }}
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='main.css')}}">
+    {# Flask uses 'Jinja2', extensible templating engine that allows us to write code similar to python in templates through code blocks {% %} for starting and ending blocks, {{ }} for passed in vairables from render_template #}
+    {% if title %}
+        <title>Flask Blog - {{ title }}</title>
+    {% else %}
+        <title>Flask Blog</title>
+    {% endif %}
+</head>
+<body>
+    <header class="site-header">
+      <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
+        <div class="container">
+          <a class="navbar-brand mr-4" href="/">Flask Blog</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarToggle">
+            <div class="navbar-nav mr-auto">
+              <a class="nav-item nav-link" href="/">Home</a>
+              <a class="nav-item nav-link" href="/about">About</a>
+            </div>
+            <div class="navbar-nav">
+              <a class="nav-item nav-link" href="/login">Login</a> <!--page not created yet-->
+              <a class="nav-item nav-link" href="/register">Register</a> <!--page not created yet-->
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <main role="main" class="container">
+        <div class="row">
+            <div class="col-md-8">
+                 {% block content %}{% endblock %} {# creating a block called content, we are going to extend layout in our other templates, and override content, which will modify content only on that route #}
+            </div>
+            <div class="col-md-4">
+                <div class="content-section">
+                    <h3>Our Sidebar</h3>
+                        <p class="text-muted">further information here
+                            <ul>
+                                <li>Latest Posts</li>
+                                <li>Announcemtns</li>
+                                <li>Calendars</li>
+                                <li>etc</li>
+                            </ul>
+                        </p>
+                </div>
+            </div>
+        </div>
+    </main>
+    {{ bootstrap.load_js() }}
+</body>
+</html>
